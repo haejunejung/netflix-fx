@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/netflix-fx/static/js/main.07405db1.js",
+    "main.js": "/netflix-fx/static/js/main.dcad0071.js",
     "static/js/787.423a2c93.chunk.js": "/netflix-fx/static/js/787.423a2c93.chunk.js",
     "index.html": "/netflix-fx/index.html",
-    "main.07405db1.js.map": "/netflix-fx/static/js/main.07405db1.js.map",
+    "main.dcad0071.js.map": "/netflix-fx/static/js/main.dcad0071.js.map",
     "787.423a2c93.chunk.js.map": "/netflix-fx/static/js/787.423a2c93.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.07405db1.js"
+    "static/js/main.dcad0071.js"
   ]
 }
