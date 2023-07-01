@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import bannerLogo from "../assets/logo.jpg";
 import InputItem from "../components/InputItem";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -81,7 +81,7 @@ const Login = () => {
         >
           Sign In
         </Button>
-        <Help>Help</Help>
+        <Help>Help?</Help>
         <Button onClick={handleKakaoButton} backgroundColor={"yellow"}>
           Kakao
         </Button>
