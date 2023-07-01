@@ -1,9 +1,111 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import logo from "../assets/logo.jpg";
+import bannerLogo from "../assets/logo.jpg";
 import InputItem from "../components/InputItem";
+import { Link } from "react-router-dom";
 
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //* 이메일 유효성 검사
+  const isEmailValidation = email.length !== 0 && email.includes("@");
+
+  //* 비밀번호 유효성 검사
+  const isPasswordValidation =
+    password.length >= 8 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /[0-9]/.test(password);
+
+  //* 유효성 검사
+  const isValidation = isEmailValidation && isPasswordValidation;
+
+  //* 사용자 정보
+  const user = [
+    {
+      name: email,
+      title: "Email",
+      type: "email",
+      validation: isEmailValidation,
+      alert: "정확한 이메일 주소 형식으로 입력해주세요.",
+      getter: email,
+      setter: setEmail,
+    },
+    {
+      name: password,
+      title: "Password",
+      type: "password",
+      validation: isPasswordValidation,
+      alert: "8자 이상 영문 대소문자, 숫자, 특수문자를 입력해주세요.",
+      getter: password,
+      setter: setPassword,
+    },
+  ];
+
+  //* sign in button handler
+  const handleSignInButton = () => {
+    //TODO
+  };
+
+  //* sign in kakao button handler
+  const handleKakaoButton = () => {
+    //TODO
+  };
+
+  //* sign in google button handler
+  const handleGoogleButton = () => {
+    //TODO
+  };
+
+  //* sign in naver button handler
+  const handleNaverButton = () => {
+    //TODO
+  };
+
+  return (
+    <Background>
+      <NavBar>
+        <NetflixLogo src={bannerLogo} />
+      </NavBar>
+      <LoginContainer>
+        <Title>Sign In</Title>
+        {user.map((data, idx) => {
+          return <InputItem key={idx} data={data} />;
+        })}
+        <Button
+          disabled={!isValidation}
+          onClick={handleSignInButton}
+          backgroundColor={"red"}
+        >
+          Sign In
+        </Button>
+        <Help>Help</Help>
+        <Button onClick={handleKakaoButton} backgroundColor={"yellow"}>
+          Kakao
+        </Button>
+        <Button onClick={handleGoogleButton} backgroundColor={"orange"}>
+          Google
+        </Button>
+        <Button onClick={handleNaverButton} backgroundColor={"green"}>
+          Naver
+        </Button>
+        <PlaceHolder>
+          If you are not member,
+          <Link to="/signup">
+            <SignUp> SignUp </SignUp>
+          </Link>
+          Now!
+        </PlaceHolder>
+      </LoginContainer>
+    </Background>
+  );
+};
+
+export default Login;
+
+//* styled-components
 const Background = styled.div`
   display: flex;
   justify-content: center;
@@ -13,6 +115,8 @@ const Background = styled.div`
   position: relative;
   background-image: url(${process.env.PUBLIC_URL}/assets/banner.jpg);
   background-size: cover;
+
+  overflow: hidden;
 `;
 
 const NavBar = styled.div`
@@ -24,10 +128,10 @@ const NavBar = styled.div`
 
 const NetflixLogo = styled.img`
   position: absolute;
-  left: 50px;
+  left: 45px;
   top: 10px;
-  width: 200px;
-  height: 150px;
+  width: 120px;
+  height: 60px;
 `;
 
 const LoginContainer = styled.div`
@@ -45,25 +149,14 @@ const Title = styled.h1`
   font-size: xx-large;
 `;
 
-const Input = styled.input`
-  font-size: medium;
+const Button = styled.button`
   height: 50px;
-  padding: 16px 20px 0;
-  margin-bottom: 16px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  background-color: rgb(51, 51, 51, 0.75);
-`;
-
-const SignInButton = styled.button`
-  height: 50px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   border: none;
   outline: none;
-  background-color: rgb(229, 9, 20);
+  background-color: ${(props) => props.backgroundColor};
   color: #f2f5f5;
   font-weight: 700;
   font-size: large;
@@ -72,52 +165,25 @@ const SignInButton = styled.button`
   }
 `;
 
-//!
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Help = styled.div`
+  height: 20px;
+  margin: 10px 0;
+  color: #939393;
+  text-decoration: none;
+  text-align: right;
+`;
 
-  const checkEmailValidation = (email) => {
-    return email.length === 0 || !email.includes("@") ? false : true;
-  };
+const PlaceHolder = styled.div`
+  height: 20px;
+  margin: 10px 0;
+  color: #939393;
+  text-decoration: none;
+  text-align: center;
+`;
 
-  const checkPasswordValidation = (password) => {
-    return email.length < 8 ? false : true;
-  };
-
-  const user = [
-    {
-      name: email,
-      title: "email",
-      type: "email",
-      validation: checkEmailValidation,
-      inputAlert: "정확한 이메일 주소 형식으로 입력해주세요.",
-      setter: setEmail,
-    },
-    {
-      name: password,
-      title: "password",
-      type: "password",
-      validation: checkPasswordValidation,
-      inputAlert: "8자 이상 영문 대소문자, 숫자, 특수문자를 입력해주세요.",
-      setter: setPassword,
-    },
-  ];
-
-  return (
-    <Background>
-      <NavBar>
-        <NetflixLogo src={logo} />
-      </NavBar>
-      <LoginContainer>
-        <Title>Sign In</Title>
-        {user.map((data, idx) => {
-          return <InputItem key={idx} data={data} />;
-        })}
-        <SignInButton>Sign In</SignInButton>
-      </LoginContainer>
-    </Background>
-  );
-};
-
-export default Login;
+const SignUp = styled.span`
+  color: blue;
+  font-size: large;
+  text-decoration: none;
+  font-weight: 700;
+`;
