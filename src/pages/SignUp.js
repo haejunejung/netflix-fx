@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import bannerLogo from "../assets/logo.jpg";
 import InputItem from "../components/InputItem";
@@ -8,6 +9,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   //* 특수 문자
   const specialChars = /[ `!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/;
@@ -62,6 +64,7 @@ const SignUp = () => {
   //* sign up button handler
   const handleSignUpButton = () => {
     //TODO
+    navigate("/");
   };
 
   return (

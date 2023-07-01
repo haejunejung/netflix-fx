@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import bannerLogo from "../assets/logo.jpg";
 import InputItem from "../components/InputItem";
@@ -8,6 +8,7 @@ import InputItem from "../components/InputItem";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   //* 이메일 유효성 검사
   const isEmailValidation = email.length !== 0 && email.includes("@");
@@ -47,6 +48,7 @@ const Login = () => {
   //* sign in button handler
   const handleSignInButton = () => {
     //TODO
+    navigate("/profile");
   };
 
   //* sign in kakao button handler
