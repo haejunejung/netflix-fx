@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import bannerlogo from "../assets/logo.jpg";
 import profilelogo from "../assets/profile.jpg";
-import { CardGiftcard, Notifications, Search } from "@mui/icons-material";
+import {
+  ArrowDropDown,
+  CardGiftcard,
+  Notifications,
+  Search,
+} from "@mui/icons-material";
 
 const Navigation = () => {
   const [isScroll, setIsScroll] = useState(false);
@@ -25,6 +30,8 @@ const Navigation = () => {
       title: "My Lists",
     },
   ];
+
+  const PROFILE_LINKS = ["settings", "logout"];
 
   const handleScroll = () => {
     if (window.scrollY === 0) {
@@ -56,6 +63,14 @@ const Navigation = () => {
           <CardGiftcard />
           <Notifications />
           <Profile src={profilelogo} />
+          <ProfileDropdown>
+            <ArrowDropDown />
+            <Links>
+              {PROFILE_LINKS.map((link, index) => {
+                return <LinkItem>{link}</LinkItem>;
+              })}
+            </Links>
+          </ProfileDropdown>
         </RightItems>
       </Container>
     </NavBar>
@@ -73,6 +88,13 @@ const NavBar = styled.section`
   width: 100%;
   transition: all 400ms ease-out;
   background: linear-gradient(to top, trasparent 0%, rgb(0, 0, 0, 0.2) 50%);
+
+  ${(props) =>
+    props.isScroll &&
+    css`
+      background-color: #0b0b0b;
+      transition: all 400ms ease-in;
+    `}
 `;
 
 const Container = styled.div`
@@ -107,5 +129,25 @@ const Profile = styled.img`
   width: 25px;
   border-radius: 4px;
   object-fit: cover;
+  cursor: pointer;
+`;
+
+const ProfileDropdown = styled.div`
+  cursor: pointer;
+`;
+
+const Links = styled.div`
+  display: none;
+
+  ${ProfileDropdown}:hover & {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: var(--main-color);
+  }
+`;
+
+const LinkItem = styled.span`
+  padding: 8px;
   cursor: pointer;
 `;

@@ -11,8 +11,7 @@ const HomeStream = () => {
   const [isDisplay, setIsDisplay] = useState(false);
   const [movie, setMovie] = useState({
     name: "Star wars",
-    description:
-      "star wars description\n star wars description\n star wars description star wars description\n star wars description\n star wars description star wars description\n star wars description\n star wars description star wars description\n star wars description\n star wars description",
+    description: "star wars description",
   });
 
   //* fetch the movie
