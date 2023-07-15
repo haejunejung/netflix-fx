@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import bannerlogo from "../assets/logo.jpg";
 import profilelogo from "../assets/profile.jpg";
@@ -9,32 +8,23 @@ import { CardGiftcard, Notifications, Search } from "@mui/icons-material";
 const Navigation = () => {
   const [isScroll, setIsScroll] = useState(false);
 
-  const navigate = useNavigate();
-
-  const menu = [
+  const MENUS = [
     {
       title: "Home",
-      navigate: "/home",
     },
     {
       title: "Tv Shows",
-      navigate: "/tvshows",
     },
     {
       title: "Movies",
-      navigate: "/movies",
     },
     {
       title: "Latest",
-      navigate: "/latest",
     },
     {
       title: "My Lists",
-      navigate: "/mylists",
     },
   ];
-
-  //   const menu = ["Home", "Tv Shows", "Movies", "Latest", "My List"];
 
   const handleScroll = () => {
     if (window.scrollY === 0) {
@@ -53,71 +43,69 @@ const Navigation = () => {
 
   return (
     <NavBar isScroll={isScroll}>
-      <NavBarLeft>
-        <NetflixLogo src={bannerlogo} />
-        {menu.map((data, idx) => {
-          return (
-            <Text
-              key={idx}
-              onClick={() => {
-                navigate(`${data.navigate}`);
-              }}
-            >
-              {data.title}
-            </Text>
-          );
-        })}
-      </NavBarLeft>
-      <NavBarRight>
-        <ProfileLogo src={profilelogo} />
-        <Search />
-        <CardGiftcard />
-        <Notifications />
-      </NavBarRight>
+      <Container>
+        <LeftItems>
+          <NetflixLogo src={bannerlogo} />
+          {MENUS.map((value, indext) => {
+            return <Item>{value.title}</Item>;
+          })}
+        </LeftItems>
+
+        <RightItems>
+          <Search />
+          <CardGiftcard />
+          <Notifications />
+          <Profile src={profilelogo} />
+        </RightItems>
+      </Container>
     </NavBar>
   );
 };
 
 export default Navigation;
 
-const NavBar = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 5px 45px;
-  height: 10vh;
-  margin-top: 10px;
-  justify-content: space-between;
-
-  position: ${(props) => (props.isScroll ? "sticky" : "relative")};
-  background: ${(props) =>
-    props.isScroll ? "rgb(15, 15, 15)" : "transparent"};
+const NavBar = styled.section`
+  color: #f2f2f2;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
   z-index: 999;
+  width: 100%;
+  transition: all 400ms ease-out;
+  background: linear-gradient(to top, trasparent 0%, rgb(0, 0, 0, 0.2) 50%);
 `;
 
-const NavBarLeft = styled.div`
+const Container = styled.div`
+  padding: 10px 45px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
-const NavBarRight = styled.nav`
+const LeftItems = styled.div`
   display: flex;
   align-items: center;
 `;
 
 const NetflixLogo = styled.img`
-  left: 45px;
-  top: 10px;
-  width: 120px;
-  height: 60px;
-  margin-right: 20px;
+  height: 45px;
+  margin-right: 40px;
 `;
 
-const Text = styled.span`
-  font-size: large;
-  margin-left: 10px;
+const Item = styled.span`
+  margin-right: 18px;
+  cursor: pointer;
 `;
 
-const ProfileLogo = styled.img`
-  width: 30px;
-  height: 20px;
+const RightItems = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Profile = styled.img`
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
 `;
