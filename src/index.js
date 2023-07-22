@@ -8,6 +8,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import Pages from "./Pages";
+import App from "./App";
 
 const theme = {
   logoRed: "rgb(233, 0, 22)",
@@ -19,6 +20,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Pages />
+      {/* <App /> */}
     </ThemeProvider>
   </React.StrictMode>
 );
