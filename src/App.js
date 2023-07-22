@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { handleFetch } from "./utils/functions";
+import { API_PATHS } from "./utils/constants";
 
 const App = () => {
-  const callApi = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api/movies");
-      console.log(response);
-    } catch (error) {
-      console.log("Error:", error.message);
-    }
-  };
-
   useEffect(() => {
-    callApi();
+    handleFetch(API_PATHS.MOVIES, (data) => {
+      console.log(data);
+    });
   }, []);
 
   return <div>test</div>;
